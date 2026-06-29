@@ -96,6 +96,8 @@ export default function CardGrid({ istat, idAnalysis, items, initialCounts, upda
           voted={voted.has(item.id)}
           update={updates[item.id] ?? null}
           onVote={onVote}
+          istat={istat}
+          idAnalysis={idAnalysis}
           footerBg={footerBg}
         />
       ))}

@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { SignInButton, useAuth } from "@clerk/nextjs";
 import type { AnalysisItem, CardUpdate } from "@/lib/types";
 import { accentFor } from "@/lib/types";
+import { useEnteAccess } from "@/lib/useEnteAccess";
 import ShareMenu from "./ShareMenu";
+import EnteUpdateForm from "./EnteUpdateForm";
 
 const STATUS_LABEL: Record<string, string> = {
   confermato: "Confermato dall'ente",
@@ -40,6 +43,8 @@ export default function Card({
   voted,
   update,
   onVote,
+  istat,
+  idAnalysis,
   footerBg = "#FBF8F1",
 }: {
   item: AnalysisItem;
@@ -47,9 +52,13 @@ export default function Card({
   voted: boolean;
   update?: CardUpdate | null;
   onVote: (item: AnalysisItem) => void;
+  istat: string;
+  idAnalysis: string;
   footerBg?: string;
 }) {
   const { isSignedIn } = useAuth();
+  const { canEdit } = useEnteAccess(istat);
+  const [currentUpdate, setCurrentUpdate] = useState<CardUpdate | null>(update ?? null);
   const accent = accentFor(item.category);
 
   const likeBtn = (
@@ -92,7 +101,18 @@ export default function Card({
             <span style={{ font: "500 12.5px/1.5 'Archivo'", color: "#5A5346" }}>{item.funding}</span>
           </div>
         )}
-        {update && <StatusBadge u={update} />}
+        {currentUpdate && <StatusBadge u={currentUpdate} />}
+        {canEdit && (
+          <div style={{ marginTop: currentUpdate ? 10 : "auto", paddingTop: currentUpdate ? 0 : 12, borderTop: currentUpdate ? "none" : "1px dashed #E6DECF" }}>
+            <EnteUpdateForm
+              istat={istat}
+              idAnalysis={idAnalysis}
+              itemId={item.id}
+              itemTitle={item.title}
+              onSubmitted={setCurrentUpdate}
+            />
+          </div>
+        )}
       </div>
       <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 16px", borderTop: "1px solid #EFE8DA", background: footerBg }}>
         {isSignedIn ? likeBtn : <SignInButton mode="modal">{likeBtn}</SignInButton>}
