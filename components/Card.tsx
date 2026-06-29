@@ -7,6 +7,7 @@ import { accentFor } from "@/lib/types";
 import { useEnteAccess } from "@/lib/useEnteAccess";
 import ShareMenu from "./ShareMenu";
 import EnteUpdateForm from "./EnteUpdateForm";
+import CategoryIcon from "./CategoryIcon";
 
 const STATUS_LABEL: Record<string, string> = {
   confermato: "Confermato dall'ente",
@@ -84,7 +85,10 @@ export default function Card({
       <div style={{ height: 4, background: accent }} />
       <div style={{ padding: "20px 22px 16px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
         {item.category && (
-          <span style={{ alignSelf: "flex-start", font: "600 11px 'Archivo'", letterSpacing: ".09em", textTransform: "uppercase", color: accent }}>{item.category}</span>
+          <span style={{ alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 6, font: "600 11px 'Archivo'", letterSpacing: ".09em", textTransform: "uppercase", color: accent }}>
+            <CategoryIcon category={item.category} size={14} />
+            {item.category}
+          </span>
         )}
         <h3 style={{ margin: 0, font: "600 20px/1.26 'Spectral'", color: "#211E1A" }}>{item.title}</h3>
         {item.badges.length > 0 && (

@@ -58,8 +58,8 @@ export default async function CityPage({ params }: { params: Promise<{ istat: st
       <Section id="idee" bg="#FBF8F1">
         <SectionHead
           eyebrow="Idee per il territorio"
-          title="Spunti dagli scarti tra dati e attuato"
-          text="Confronti con comuni simili, bisogni scoperti, progetti fermi e risorse disponibili. Sostieni le idee che ti convincono."
+          title="Idee che nascono dai dati"
+          text="Confronti con comuni simili, bisogni scoperti, progetti fermi e risorse disponibili: spunti per trasformare i divari del territorio in opportunità. Sostieni le idee che ti convincono."
         />
         <CardGrid istat={a.istat} idAnalysis={a.idAnalysis} items={a.idee} initialCounts={counts} updates={updates} minColWidth={330} footerBg="#FAF6EE" />
       </Section>
