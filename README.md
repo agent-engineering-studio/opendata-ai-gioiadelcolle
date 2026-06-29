@@ -76,3 +76,44 @@ coincide con quello della rotta → ogni ente aggiorna **solo** le card del prop
 2. Importa il progetto su Vercel.
 3. Imposta le env var (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `DATABASE_URL`, le due URL Clerk).
 4. Deploy automatico ad ogni push.
+
+## Roadmap — prossime versioni
+
+Questo sito è la **Fase 4 · "Sito civico"** della roadmap di
+[opendata-ai](../opendata-ai/docs/architettura.md): pubblicazione versionata
+dell'analisi, diff *"fatto vs non fatto"* (qui i `card_updates` con flag
+`divergence`) e partecipazione della community (voto "Sostieni" + condivisione).
+Di seguito le cose da fare, raggruppate per versione.
+
+### ✅ Fatto (v0.1)
+- Sito Next.js full-stack su Vercel, auth Clerk, persistenza Neon.
+- Voto cittadino "Sostieni" (1/persona, revocabile) + condivisione social/OG.
+- Verifiche dell'ente via Clerk Organizations (`card_updates`, append-only).
+- Quadro di sintesi: indice 0–100 sull'uso dei fondi, grafico capacità di
+  spesa per tema, carta d'identità del comune; modali esplicative.
+
+### v0.2 — Completare il ciclo dell'ente
+- [ ] **Timeline delle verifiche**: UI pubblica che mostra lo storico
+  `card_updates` per ogni card (l'API `GET /updates?itemId=` esiste già).
+- [ ] **Onboarding ente**: pagina dedicata per inviti/membership all'org del
+  comune (oggi via Clerk Backend API a mano).
+- [ ] **Notifiche**: avvisa i sostenitori quando una card che hanno votato
+  riceve un aggiornamento di stato dall'ente.
+- [ ] **OG image per card**: anteprime social dedicate alla singola proposta.
+
+### v0.3 — Multi-comune reale
+- [ ] **Ingestione automatica** dei report markdown `analisi-territorio-{istat}`
+  → `content/analisi-{istat}.ts` + riga `city_analysis` (oggi trascritto a mano).
+- [ ] **Indice dei comuni** (`/`): elenco/ricerca dei comuni pubblicati.
+- [ ] **Snapshot versionati** (allineamento Fase 4): più `id_analysis` per
+  comune nel tempo, con **diff** tra una versione e la precedente.
+- [ ] Generalizzare hero/branding per comune.
+
+### v1.0 — Integrazione con opendata-ai
+- [ ] **Aggancio al backend opendata-ai** (A2A / API) per generare e aggiornare
+  le analisi senza passaggi manuali.
+- [ ] **Anello valore⇄maturità (Fase 5)**: i gap di dato dell'analisi diventano
+  "domanda di riuso" che incrocia la maturità open-data dell'ente.
+- [ ] **Cruscotto dell'ente**: aggregati dei sostegni e delle verifiche per
+  orientare le priorità.
+- [ ] Accessibilità (WCAG), SEO/sitemap, test E2E + CI.
