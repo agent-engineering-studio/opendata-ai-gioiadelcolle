@@ -24,6 +24,31 @@ export default function Footer({ a }: { a: CityAnalysis }) {
           <br />OpenStreetMap · MIUR · Min. Salute
         </div>
       </div>
+
+      {/* Credito: realizzato con opendata-ai (Agent Engineering) */}
+      <div style={{ borderTop: "1px solid #322D26" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px clamp(18px,5vw,64px)", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ font: "400 11px 'IBM Plex Mono'", color: "#8C8068" }}>
+            Generato e progettato con la piattaforma open data
+          </span>
+          <a
+            href="https://opendata-ai.agentengineering.it/"
+            target="_blank"
+            rel="noopener"
+            title="opendata-ai — Agent Engineering"
+            style={{ display: "inline-flex", alignItems: "center", gap: 9, textDecoration: "none", color: "#EADFCB" }}
+          >
+            <svg width="22" height="22" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <circle cx="24" cy="24" r="15" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" strokeDasharray="71 26" transform="rotate(-58 24 24)" />
+              <circle cx="14.8" cy="30.6" r="2.8" fill="#ffffff" />
+              <circle cx="23.6" cy="24.6" r="2.8" fill="#ffffff" />
+              <circle cx="32.8" cy="17.4" r="3.7" fill="#7BE7C4" />
+            </svg>
+            <span style={{ font: "600 13px 'Spectral'", color: "#FCF8F0" }}>opendata-ai</span>
+            <span style={{ font: "400 11px 'Archivo'", color: "#8C8068" }}>· Agent Engineering</span>
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }
