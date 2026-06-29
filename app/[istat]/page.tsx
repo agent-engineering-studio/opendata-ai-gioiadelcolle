@@ -14,6 +14,9 @@ import { Section, SectionHead } from "@/components/Section";
 
 export const dynamic = "force-dynamic"; // conteggi/voti sempre freschi
 
+const SUPPORT_INFO =
+  "Per sostenere una scheda accedi con il pulsante «Accedi» in alto a destra, poi premi «Sostieni»: vale un voto per persona per ciascuna proposta, idea o spunto di marketing, sempre revocabile (ripremi per togliere il sostegno). Il conteggio è pubblico e aggregato. Con «Condividi» puoi diffondere la singola scheda su Facebook, WhatsApp, X, LinkedIn o copiarne il link diretto. I sostegni sono uno strumento di partecipazione civica per far emergere le priorità sentite dalla comunità, non un sondaggio scientifico.";
+
 export async function generateMetadata({ params }: { params: Promise<{ istat: string }> }): Promise<Metadata> {
   const { istat } = await params;
   const a = getAnalysisByIstat(istat);
@@ -50,6 +53,7 @@ export default async function CityPage({ params }: { params: Promise<{ istat: st
         <SectionHead
           eyebrow="Proposte operative"
           title="Proposte per il territorio"
+          info={SUPPORT_INFO}
           text="Ogni proposta nasce da uno scarto tra i dati e quanto realizzato. Esprimi il tuo sostegno di cittadino e condividi la card."
         />
         <CardGrid istat={a.istat} idAnalysis={a.idAnalysis} items={a.proposte} initialCounts={counts} updates={updates} minColWidth={380} footerBg="#FBF8F1" />
@@ -60,6 +64,7 @@ export default async function CityPage({ params }: { params: Promise<{ istat: st
         <SectionHead
           eyebrow="Idee per il territorio"
           title="Idee che nascono dai dati"
+          info={SUPPORT_INFO}
           text="Confronti con comuni simili, bisogni scoperti, progetti fermi e risorse disponibili: spunti per trasformare i divari del territorio in opportunità. Sostieni le idee che ti convincono."
         />
         <CardGrid istat={a.istat} idAnalysis={a.idAnalysis} items={a.idee} initialCounts={counts} updates={updates} minColWidth={330} footerBg="#FAF6EE" />
@@ -70,6 +75,7 @@ export default async function CityPage({ params }: { params: Promise<{ istat: st
         <SectionHead
           eyebrow="Marketing territoriale"
           title="Spunti di posizionamento e attrattività"
+          info={SUPPORT_INFO}
           text="Ogni spunto cita una premessa locale e un precedente esterno. Non sono atti amministrativi né progetti finanziati."
         />
         {a.marketing.map((g) => (

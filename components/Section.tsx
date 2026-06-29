@@ -1,15 +1,29 @@
 import type { CSSProperties } from "react";
+import InfoDot from "./InfoDot";
 
-/** Intestazione di sezione riusabile (eyebrow + titolo + testo). */
-export function SectionHead({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
+/** Intestazione di sezione riusabile (eyebrow + titolo + testo + info opzionale). */
+export function SectionHead({
+  eyebrow,
+  title,
+  text,
+  info,
+}: {
+  eyebrow: string;
+  title: string;
+  text?: string;
+  info?: string;
+}) {
   return (
     <div style={{ maxWidth: 820, marginBottom: 30 }}>
       <div style={{ font: "600 12px 'Archivo'", letterSpacing: ".16em", textTransform: "uppercase", color: "#A8432A", marginBottom: 10 }}>
         {eyebrow}
       </div>
-      <h2 style={{ margin: "0 0 14px", font: "600 clamp(28px,4vw,42px)/1.08 'Spectral'", color: "#211E1A", letterSpacing: "-.01em" }}>
-        {title}
-      </h2>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14, flexWrap: "wrap" }}>
+        <h2 style={{ margin: 0, font: "600 clamp(28px,4vw,42px)/1.08 'Spectral'", color: "#211E1A", letterSpacing: "-.01em" }}>
+          {title}
+        </h2>
+        {info && <InfoDot title="Come sostenere e condividere" info={info} />}
+      </div>
       {text && <p style={{ margin: 0, font: "400 16px/1.65 'Archivo'", color: "#4A4439" }}>{text}</p>}
     </div>
   );
