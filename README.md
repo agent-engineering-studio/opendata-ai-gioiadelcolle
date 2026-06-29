@@ -63,6 +63,23 @@ Gli aggiornamenti delle card sono riservati agli enti:
 Il `POST /updates` (vedi `lib/auth-org.ts`) accetta solo membri di un'org il cui `istat`
 coincide con quello della rotta → ogni ente aggiorna **solo** le card del proprio comune.
 
+## Importare la maturità open data (da markdown)
+
+La sezione "Maturità open data" si alimenta da schede markdown salvate nel DB
+(tabella `maturity_reports`). Lo script riconosce due formati: scheda con
+punteggio ODM e caso "Dato insufficiente" (guida operativa).
+
+```bash
+export DATABASE_URL="postgresql://…neon.tech/neondb?sslmode=require"
+# Comune (es. dato insufficiente)
+node scripts/import-maturity.mjs maturita-comune-di-gioia-del-colle.md --scope comune --istat 072021 --region Puglia
+# Regione (scorecard) — usata come contesto quando il comune non ha dati
+node scripts/import-maturity.mjs maturita-regione-puglia.md --scope regione --region Puglia
+```
+
+La pagina del comune mostra la sua maturità; se è "insufficiente", aggiunge il
+contesto della regione di riferimento.
+
 ## Aggiungere un nuovo comune
 
 1. `content/analisi-{istat}.ts` (stesso shape di `content/analisi-072021.ts`).

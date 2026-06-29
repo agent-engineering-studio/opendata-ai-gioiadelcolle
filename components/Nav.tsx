@@ -6,6 +6,7 @@ const links = [
   ["#proposte", "Proposte"],
   ["#idee", "Idee"],
   ["#marketing", "Marketing"],
+  ["#maturita", "Maturità"],
   ["#fonti", "Fonti"],
 ];
 

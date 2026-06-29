@@ -99,6 +99,41 @@ export function accentFor(category?: string): string {
   return (category && CAT_COLOR[category]) || "#A8432A";
 }
 
+// ── Maturità open data (importata da markdown, salvata in DB) ──
+
+export interface MaturityScored {
+  status: "scored";
+  odmLevel: string | null;
+  score: number | null;
+  datasetCount: number | null;
+  dimensions: { name: string; score: number }[];
+  sectorsMissing: string[];
+  recommendations: { priority: string; text: string }[];
+}
+
+export interface MaturityInsufficient {
+  status: "insufficient";
+  intro: string;
+  whyPublish: { title: string; text: string }[];
+  steps: { n: number; title: string; text: string }[];
+  note: string | null;
+}
+
+export type MaturityData = MaturityScored | MaturityInsufficient;
+
+export interface MaturityReport {
+  slug: string;
+  scope: "comune" | "regione";
+  istat: string | null;
+  region: string | null;
+  entityName: string;
+  status: "insufficient" | "scored";
+  score: number | null;
+  odmLevel: string | null;
+  data: MaturityData;
+  generatedAt: string | null;
+}
+
 /** Conteggi voti per item_id. */
 export type CountsMap = Record<string, number>;
 

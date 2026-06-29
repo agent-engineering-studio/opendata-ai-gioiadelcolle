@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAnalysisByIstat } from "@/lib/content";
 import { getCounts, getLatestUpdates } from "@/lib/preferences";
+import { getComuneMaturity, getRegionMaturity } from "@/lib/maturity";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Kpis from "@/components/Kpis";
 import Swot from "@/components/Swot";
 import Fonti from "@/components/Fonti";
+import Maturity from "@/components/Maturity";
 import Disclaimer from "@/components/Disclaimer";
 import Footer from "@/components/Footer";
 import CardGrid from "@/components/CardGrid";
@@ -36,10 +38,16 @@ export default async function CityPage({ params }: { params: Promise<{ istat: st
   const a = getAnalysisByIstat(istat);
   if (!a) notFound();
 
-  const [counts, updates] = await Promise.all([
+  const [counts, updates, comuneMaturity] = await Promise.all([
     getCounts(a.istat, a.idAnalysis),
     getLatestUpdates(a.istat, a.idAnalysis),
+    getComuneMaturity(a.istat),
   ]);
+  // Se il comune non ha dati di maturità sufficienti, mostra il contesto regionale.
+  const regionMaturity =
+    comuneMaturity?.status === "insufficient" && comuneMaturity.region
+      ? await getRegionMaturity(comuneMaturity.region)
+      : null;
 
   return (
     <>
@@ -88,6 +96,8 @@ export default async function CityPage({ params }: { params: Promise<{ istat: st
           </div>
         ))}
       </Section>
+
+      {comuneMaturity && <Maturity comune={comuneMaturity} region={regionMaturity} />}
 
       <Fonti a={a} />
       <Disclaimer a={a} />
