@@ -15,7 +15,7 @@ export default function Footer({ a }: { a: CityAnalysis }) {
             <span style={{ font: "600 16px 'Spectral'", color: "#FCF8F0" }}>{a.comune} — Analisi del territorio</span>
           </div>
           <p style={{ margin: 0, font: "400 12.5px/1.6 'Archivo'", color: "#A99B82" }}>
-            Analisi automatica su soli dati pubblici. Non costituisce materiale elettorale né parere legale o urbanistico. I sostegni richiedono l'accesso e sono salvati nel database.
+            Spazio civico di confronto sul valore degli open data. I sostegni richiedono l'accesso e sono salvati nel database. Vedi le avvertenze e finalità complete qui sopra.
           </p>
         </div>
         <div style={{ font: "400 11px/1.7 'IBM Plex Mono'", color: "#8C8068" }}>

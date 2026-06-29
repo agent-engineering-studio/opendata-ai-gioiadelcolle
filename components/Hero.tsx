@@ -25,14 +25,6 @@ export default function Hero({ a }: { a: CityAnalysis }) {
           </div>
         </div>
       </header>
-      <div style={{ background: "#26221C", color: "#C9BBA2" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "flex-start", gap: 11, padding: "11px clamp(18px,5vw,64px)", font: "500 12px/1.55 'Archivo'" }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E9C9A8" strokeWidth="1.8" style={{ flex: "none", marginTop: 1 }}>
-            <path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
-          </svg>
-          <span>{a.disclaimer}</span>
-        </div>
-      </div>
     </>
   );
 }

@@ -7,6 +7,7 @@ import Hero from "@/components/Hero";
 import Kpis from "@/components/Kpis";
 import Swot from "@/components/Swot";
 import Fonti from "@/components/Fonti";
+import Disclaimer from "@/components/Disclaimer";
 import Footer from "@/components/Footer";
 import CardGrid from "@/components/CardGrid";
 import { Section, SectionHead } from "@/components/Section";
@@ -83,6 +84,7 @@ export default async function CityPage({ params }: { params: Promise<{ istat: st
       </Section>
 
       <Fonti a={a} />
+      <Disclaimer a={a} />
       <Footer a={a} />
     </>
   );
