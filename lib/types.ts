@@ -13,11 +13,18 @@ export interface AnalysisItem {
   funding?: string; // solo per le proposte
 }
 
+/** Definizione di un termine tecnico, mostrata come riquadro nella modale "i". */
+export interface Glossary {
+  term: string;
+  def: string;
+}
+
 export interface Kpi {
   value: string;
   label: string;
   sub: string;
-  info?: string; // spiegazione estesa mostrata nella modale "i"
+  info?: string; // spiegazione estesa: paragrafi separati da \n\n, **grassetto** supportato
+  glossary?: Glossary;
 }
 
 export interface SwotItem {
@@ -53,7 +60,7 @@ export interface CityAnalysis {
   disclaimer: string;
   intro: { eyebrow: string; title: string; text: string };
   kpis: Kpi[];
-  highlights: { value: string; label: string; text: string; color: string; info?: string }[];
+  highlights: { value: string; label: string; text: string; color: string; info?: string; glossary?: Glossary }[];
   swot: SwotQuadrant[];
   proposte: AnalysisItem[];
   idee: AnalysisItem[];

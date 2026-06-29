@@ -11,7 +11,7 @@ export default function Kpis({ a }: { a: CityAnalysis }) {
           <div key={k.label} style={{ position: "relative", background: "#fff", border: "1px solid #E6DECF", borderRadius: 5, padding: "18px 18px 16px" }}>
             {k.info && (
               <div style={{ position: "absolute", top: 12, right: 12 }}>
-                <InfoDot title={k.label} value={k.value} info={k.info} />
+                <InfoDot title={k.label} value={k.value} info={k.info} glossary={k.glossary} />
               </div>
             )}
             <div style={{ font: "600 clamp(28px,3.6vw,40px)/1 'Spectral'", color: "#211E1A", paddingRight: 24 }}>{k.value}</div>
@@ -25,7 +25,7 @@ export default function Kpis({ a }: { a: CityAnalysis }) {
           <div key={h.label} style={{ position: "relative", background: "#fff", border: "1px solid #E6DECF", borderLeft: `4px solid ${h.color}`, borderRadius: 5, padding: "22px 24px" }}>
             {h.info && (
               <div style={{ position: "absolute", top: 14, right: 14 }}>
-                <InfoDot title={h.label} value={h.value} info={h.info} color={h.color} />
+                <InfoDot title={h.label} value={h.value} info={h.info} glossary={h.glossary} color={h.color} />
               </div>
             )}
             <div style={{ font: "600 clamp(34px,5vw,52px)/1 'Spectral'", color: h.color, paddingRight: 28 }}>{h.value}</div>
