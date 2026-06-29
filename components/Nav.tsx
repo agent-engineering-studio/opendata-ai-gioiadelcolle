@@ -9,7 +9,7 @@ const links = [
   ["#fonti", "Fonti"],
 ];
 
-export default function Nav({ comune }: { comune: string }) {
+export default function Nav({ comune, basePath = "" }: { comune: string; basePath?: string }) {
   return (
     <nav style={{ position: "sticky", top: 0, zIndex: 60, background: "rgba(247,243,236,.92)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", borderBottom: "1px solid #E6DECF" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "11px clamp(18px,5vw,64px)", flexWrap: "wrap" }}>
@@ -22,10 +22,13 @@ export default function Nav({ comune }: { comune: string }) {
         </div>
         <div style={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
           {links.map(([href, label]) => (
-            <a key={href} href={href} className="navlink" style={{ font: "600 13px 'Archivo'", color: "#5A5346", textDecoration: "none", padding: "6px 11px", borderRadius: 6 }}>
+            <a key={href} href={`${basePath}${href}`} className="navlink" style={{ font: "600 13px 'Archivo'", color: "#5A5346", textDecoration: "none", padding: "6px 11px", borderRadius: 6 }}>
               {label}
             </a>
           ))}
+          <a href="/roadmap" className="navlink" style={{ font: "600 13px 'Archivo'", color: "#A8432A", textDecoration: "none", padding: "6px 11px", borderRadius: 6 }}>
+            Roadmap
+          </a>
           <span style={{ width: 1, height: 20, background: "#E0D7C4", margin: "0 6px" }} />
           <SignedOut>
             <SignInButton mode="modal">
