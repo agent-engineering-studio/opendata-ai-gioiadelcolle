@@ -4,7 +4,12 @@ export default function Hero({ a }: { a: CityAnalysis }) {
   return (
     <>
       <header style={{ position: "relative", minHeight: "clamp(440px,62vh,640px)", background: "#211E1A", overflow: "hidden", display: "flex" }}>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,#3a2f26 0%,#211E1A 60%,#14120f 100%)" }} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero-gioia.jpg"
+          alt="Castello normanno-svevo di Gioia del Colle"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(20,18,15,.30) 0%,rgba(20,18,15,.10) 38%,rgba(20,18,15,.86) 100%)", pointerEvents: "none" }} />
         <div style={{ position: "relative", alignSelf: "flex-end", width: "100%", padding: "0 clamp(18px,5vw,64px) 42px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>

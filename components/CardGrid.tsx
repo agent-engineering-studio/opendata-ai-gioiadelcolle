@@ -87,7 +87,7 @@ export default function CardGrid({ istat, idAnalysis, items, initialCounts, upda
   );
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: `repeat(auto-fill,minmax(${minColWidth}px,1fr))`, gap: 20 }}>
+    <div className="card-grid" style={{ "--col": `${minColWidth}px` } as React.CSSProperties}>
       {items.map((item) => (
         <Card
           key={item.id}

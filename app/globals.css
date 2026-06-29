@@ -15,3 +15,21 @@ a { color: inherit; }
 .sharerow:hover { background: #f4eee1; }
 .card { transition: box-shadow .18s ease, transform .18s ease; }
 .card:hover { box-shadow: 0 10px 30px rgba(33,30,26,.10); }
+
+/* SWOT: 1 colonna su mobile, griglia 2×2 da tablet in su */
+.swot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 760px) {
+  .swot-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Griglia card generica: responsive senza overflow su schermi stretti.
+   minmax(min(<w>,100%),1fr) evita che la colonna minima sfori il viewport. */
+.card-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--col, 360px), 100%), 1fr));
+}

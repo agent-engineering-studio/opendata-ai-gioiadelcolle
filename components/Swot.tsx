@@ -9,19 +9,29 @@ export default function Swot({ a }: { a: CityAnalysis }) {
         title="Forze, debolezze, opportunità e minacce"
         text="Lettura sintetica del territorio a partire dagli indicatori pubblici disponibili."
       />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 16 }}>
+      <div className="swot-grid">
         {a.swot.map((q) => (
-          <div key={q.label} style={{ background: "#fff", border: "1px solid #E6DECF", borderTop: `3px solid ${q.color}`, borderRadius: 5, padding: "8px 22px 18px" }}>
-            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", padding: "14px 0 4px" }}>
-              <span style={{ font: "600 17px 'Spectral'", color: q.color }}>{q.label}</span>
-              <span style={{ font: "500 11px 'Archivo'", letterSpacing: ".04em", textTransform: "uppercase", color: "#9A8E78" }}>{q.tag}</span>
-            </div>
-            {q.items.map((it) => (
-              <div key={it.title} style={{ padding: "13px 0", borderTop: "1px solid #EFE8DA" }}>
-                <div style={{ font: "600 14px 'Archivo'", color: "#211E1A", marginBottom: 4 }}>{it.title}</div>
-                <div style={{ font: "400 13.5px/1.55 'Archivo'", color: "#5A5346" }}>{it.text}</div>
+          <div key={q.label} style={{ display: "flex", flexDirection: "column", background: "#fff", border: "1px solid #E6DECF", borderTop: `3px solid ${q.color}`, borderRadius: 6, overflow: "hidden" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "14px 20px", background: `${q.color}0F`, borderBottom: "1px solid #EFE8DA" }}>
+              <span style={{ flex: "none", width: 30, height: 30, borderRadius: 7, background: q.color, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", font: "700 15px 'Spectral'" }}>
+                {q.label.charAt(0)}
+              </span>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span style={{ font: "600 16px 'Spectral'", color: q.color, lineHeight: 1.1 }}>{q.label}</span>
+                <span style={{ font: "500 10.5px 'Archivo'", letterSpacing: ".05em", textTransform: "uppercase", color: "#9A8E78" }}>{q.tag}</span>
               </div>
-            ))}
+            </div>
+            <ul style={{ listStyle: "none", margin: 0, padding: "6px 20px 16px", display: "flex", flexDirection: "column", flex: 1 }}>
+              {q.items.map((it) => (
+                <li key={it.title} style={{ display: "flex", gap: 10, padding: "11px 0", borderTop: "1px solid #F2ECDF" }}>
+                  <span style={{ flex: "none", width: 7, height: 7, borderRadius: "50%", background: q.color, marginTop: 6 }} />
+                  <div>
+                    <div style={{ font: "600 13.5px 'Archivo'", color: "#211E1A", marginBottom: 2 }}>{it.title}</div>
+                    <div style={{ font: "400 13px/1.5 'Archivo'", color: "#5A5346" }}>{it.text}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
