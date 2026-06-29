@@ -101,6 +101,12 @@ export function accentFor(category?: string): string {
 
 // ── Maturità open data (importata da markdown, salvata in DB) ──
 
+export interface MaturityLink {
+  label: string;
+  url: string;
+  note?: string | null;
+}
+
 export interface MaturityScored {
   status: "scored";
   odmLevel: string | null;
@@ -109,6 +115,8 @@ export interface MaturityScored {
   dimensions: { name: string; score: number }[];
   sectorsMissing: string[];
   recommendations: { priority: string; text: string }[];
+  docs?: MaturityLink[];
+  references?: MaturityLink[];
 }
 
 export interface MaturityInsufficient {
@@ -117,6 +125,8 @@ export interface MaturityInsufficient {
   whyPublish: { title: string; text: string }[];
   steps: { n: number; title: string; text: string }[];
   note: string | null;
+  docs?: MaturityLink[];
+  references?: MaturityLink[];
 }
 
 export type MaturityData = MaturityScored | MaturityInsufficient;

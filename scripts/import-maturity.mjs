@@ -54,6 +54,18 @@ const findSection = (kw) => {
   return key ? sections[key] : [];
 };
 
+// I link a opendata-ai puntano al deployment ufficiale agentengineering.it.
+const mapHost = (u) => u.replace(/^https?:\/\/opendata-ai\.it/, "https://opendata-ai.agentengineering.it");
+const linkRe = /^-\s*(?:[^[]*?)\[([^\]]+)\]\(([^)]+)\)(?:\s*[—–-]\s*(.+))?\s*$/;
+const parseLinks = (secLines) =>
+  secLines
+    .map((l) => l.match(linkRe))
+    .filter(Boolean)
+    .map((m) => ({ label: m[1].trim(), url: mapHost(m[2].trim()), note: m[3] ? m[3].trim() : null }));
+
+const docs = parseLinks(findSection("Documentazione"));
+const references = parseLinks(findSection("Riferimenti"));
+
 const entityName = (md.match(/^#\s*Maturità Open Data\s*[—-]\s*(.+)$/m) || [])[1]?.trim() || "Ente";
 const generatedAt = (md.match(/aggiornato al\s*([0-9]{4}-[0-9]{2}-[0-9]{2})/) || md.match(/\bil\s+([0-9]{4}-[0-9]{2}-[0-9]{2})/) || [])[1] || null;
 
@@ -80,7 +92,7 @@ if (/dato insufficiente/i.test(md)) {
   }
 
   const note = (md.match(/^>\s*(Guida operativa.+)$/m) || [])[1]?.trim() || null;
-  data = { status, intro, whyPublish, steps, note };
+  data = { status, intro, whyPublish, steps, note, docs, references };
 } else {
   status = "scored";
   odmLevel = (md.match(/Livello ODM:\s*([^*·]+)/) || [])[1]?.trim() || null;
@@ -103,7 +115,7 @@ if (/dato insufficiente/i.test(md)) {
     .filter(Boolean)
     .map((m) => ({ priority: m[1].trim(), text: m[2].trim() }));
 
-  data = { status, odmLevel, score, datasetCount, dimensions, sectorsMissing, recommendations };
+  data = { status, odmLevel, score, datasetCount, dimensions, sectorsMissing, recommendations, docs, references };
 }
 
 const slug = scope === "comune" ? `comune-${istat}` : `regione-${(region || "").toLowerCase().replace(/\s+/g, "-")}`;

@@ -191,7 +191,37 @@ function Insufficient({ r, region }: { r: MaturityReport & { data: MaturityInsuf
         ))}
       </ol>
 
-      {d.note && <p style={{ margin: "20px 0 0", font: "italic 400 12.5px/1.55 'Archivo'", color: "#9A8E78" }}>{d.note}</p>}
+      {d.docs && d.docs.length > 0 && (
+        <div style={{ marginTop: 30 }}>
+          <h3 style={{ margin: "0 0 14px", font: "600 18px 'Spectral'", color: "#211E1A" }}>Documentazione e strumenti</h3>
+          <div className="card-grid" style={{ "--col": "300px" } as React.CSSProperties}>
+            {d.docs.map((l) => (
+              <a key={l.url} href={l.url} target="_blank" rel="noopener" className="card" style={{ display: "block", textDecoration: "none", background: "#fff", border: "1px solid #E6DECF", borderLeft: "4px solid #A8432A", borderRadius: 8, padding: "16px 18px" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 14px 'Archivo'", color: "#A8432A" }}>
+                  {l.label}
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+                </span>
+                {l.note && <p style={{ margin: "6px 0 0", font: "400 12.5px/1.5 'Archivo'", color: "#5A5346" }}>{l.note}</p>}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {d.references && d.references.length > 0 && (
+        <div style={{ marginTop: 24 }}>
+          <h4 style={{ margin: "0 0 10px", font: "600 12px 'Archivo'", letterSpacing: ".06em", textTransform: "uppercase", color: "#6B6356" }}>Riferimenti istituzionali</h4>
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
+            {d.references.map((l) => (
+              <li key={l.url}>
+                <a href={l.url} target="_blank" rel="noopener" style={{ font: "500 13px 'Archivo'", color: "#3A5A8C", textDecoration: "none", borderBottom: "1px solid #C9D3E5", paddingBottom: 1 }}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {d.note && <p style={{ margin: "22px 0 0", font: "italic 400 12.5px/1.55 'Archivo'", color: "#9A8E78" }}>{d.note}</p>}
 
       {region && region.data.status === "scored" && <RegionContext r={region as MaturityReport & { data: MaturityScored }} />}
     </div>
