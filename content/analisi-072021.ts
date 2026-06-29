@@ -14,24 +14,31 @@ export const ANALISI_072021: CityAnalysis = {
     "Analisi automatica basata sui soli dati pubblici citati. Non costituisce materiale elettorale né parere legale o urbanistico; i dati ISTAT (Censimento 2011) sono una fotografia strutturale e i vincoli idrogeologici ISPRA vanno verificati puntualmente sul PAI vigente.",
   intro: {
     eyebrow: "Quadro di sintesi",
-    title: "Tre leve strutturali, un portafoglio da sbloccare",
-    text: "Gioia del Colle (~26.615 abitanti) è un comune di collina interna con una base imprenditoriale diffusa, un profilo demografico in rapido invecchiamento e un nodo ferroviario raro per l'entroterra pugliese. Sui fondi di coesione registra 753 progetti per 260,5 M€ di costo pubblico, ma con uno spend ratio globale del 46,6% frenato dai grandi cantieri stradali.",
+    title: "A che punto siamo",
+    text: "Quanto bene Gioia del Colle sta usando i fondi pubblici, spiegato in modo semplice: un punteggio di sintesi, la capacità di spesa tema per tema e i numeri chiave del territorio.",
   },
-  kpis: [
-    { value: "26.615", label: "Abitanti", sub: "OpenCoesione 2026",
-      info: "Popolazione residente di Gioia del Colle secondo i dati OpenCoesione aggiornati al 28/02/2026. È il denominatore di riferimento per gli indicatori pro-capite citati nell'analisi." },
-    { value: "753", label: "Progetti di coesione", sub: "617 conclusi (81,9%)",
-      info: "Numero totale di progetti finanziati dalle politiche di coesione (fondi UE e nazionali) localizzati sul territorio comunale. 617 risultano conclusi (81,9%), segnale di una buona capacità realizzativa storica dell'ente. Fonte: OpenCoesione, dati al 28/02/2026." },
-    { value: "260,5 M€", label: "Costo pubblico", sub: "121,4 M€ pagati",
-      info: "Costo pubblico totale dei 753 progetti di coesione. Di questi, 121,4 M€ risultano effettivamente pagati (erogati ai beneficiari). La differenza è la quota impegnata ma non ancora spesa. Fonte: OpenCoesione." },
-    { value: "46,6%", label: "Spend ratio globale", sub: "trasporti fermi al 27,1%",
-      glossary: { term: "Spend ratio · capacità di spesa", def: "È la percentuale di soldi davvero spesi rispetto a quelli messi a disposizione. Esempio: se per un'opera ci sono 100 € e ne sono stati pagati 40, lo spend ratio è 40%. Più è alto, più i fondi si stanno trasformando in opere e servizi reali." },
-      info: "Mettendo insieme **tutti** i temi, a fronte di **260,5 milioni di €** disponibili ne sono stati spesi **121,4 milioni**: il **46,6%**.\n\nÈ una media. Alcuni temi vanno bene (l'inclusione sociale è al 78,1%), altri male (i trasporti sono fermi al 27,1%): questi ultimi abbassano il risultato complessivo.\n\nFonte: OpenCoesione (dati al 28/02/2026)." },
-    { value: "157,1", label: "Indice di vecchiaia", sub: "Italia 2011 ~148",
-      info: "Numero di residenti over-65 ogni 100 under-15. Valori sopra 100 indicano una popolazione che invecchia; 157,1 supera la media nazionale del 2011 (~148) e segnala una pressione crescente sui servizi socio-assistenziali. Dato strutturale ISTAT, Censimento 2011." },
-    { value: "852 m", label: "Stazione dal centro", sub: "linea Bari–Taranto",
-      info: "Distanza della stazione ferroviaria (linea Bari–Taranto) dal centro abitato. Una dotazione di mobilità su ferro rara per un comune dell'entroterra murgiano, e una leva per l'intermodalità ferro-gomma. Fonte: OpenStreetMap." },
+  fundsScore: {
+    value: 61,
+    spendRatioPct: 46.6,
+    completionPct: 81.9,
+    glossary: {
+      term: "Indice di utilizzo dei fondi",
+      def: "Un voto da 0 a 100 che riassume quanto bene il Comune sta usando i fondi pubblici di coesione. Non è un voto ufficiale né un giudizio politico: è un indicatore civico costruito solo su dati pubblici.",
+    },
+    info: "Combina due aspetti dei fondi di coesione:\n\n**Capacità di spesa (peso 60%)** — quanto dei fondi disponibili è stato davvero speso: **46,6%**.\n\n**Progetti portati a termine (peso 40%)** — quota di progetti conclusi sul totale: **81,9%** (617 su 753).\n\nRisultato: **61 su 100**. Un valore medio: il Comune conclude bene i progetti, ma è frenato da grandi opere ancora ferme (i trasporti).\n\nSono escluse di proposito le caratteristiche del territorio (popolazione, età media, geografia): qui misuriamo **solo l'uso dei fondi**, non com'è fatto il comune.\n\nFonte: OpenCoesione (dati al 28/02/2026).",
+  },
+  spendByTheme: [
+    { label: "Trasporti e mobilità", pct: 27.1 },
+    { label: "Ambiente", pct: 63.1 },
+    { label: "Inclusione sociale", pct: 78.1 },
   ],
+  avgSpendPct: 46.6,
+  fundsSummary: {
+    projects: 753,
+    concluded: 617,
+    totalCost: "260,5 M€",
+    perCapita: "≈ 9.800 € per abitante",
+  },
   highlights: [
     {
       value: "27,1%",
@@ -49,6 +56,15 @@ export const ANALISI_072021: CityAnalysis = {
       glossary: { term: "Spend ratio · capacità di spesa", def: "È la percentuale di soldi davvero spesi rispetto a quelli messi a disposizione. Esempio: se per un'opera ci sono 100 € e ne sono stati pagati 40, lo spend ratio è 40%. Più è alto, più i fondi diventano opere e servizi concreti." },
       info: "Per i **servizi sociali e l'inclusione** erano disponibili **13,5 milioni di €** e ne sono già stati spesi **10,6 milioni**: il **78,1%**.\n\nÈ la **migliore capacità di spesa** del Comune: qui i fondi si stanno traducendo davvero in servizi per le persone, attraverso 49 progetti. Segno di una macchina amministrativa rodata su questo tema.\n\nFonte: OpenCoesione (dati al 28/02/2026).",
     },
+  ],
+  identity: [
+    { value: "26.615", label: "Abitanti", sub: "OpenCoesione 2026",
+      info: "Popolazione residente di Gioia del Colle secondo i dati OpenCoesione aggiornati al 28/02/2026. È il denominatore di riferimento per gli indicatori pro-capite citati nell'analisi." },
+    { value: "157,1", label: "Indice di vecchiaia", sub: "Italia 2011 ~148",
+      glossary: { term: "Indice di vecchiaia", def: "Quanti anziani (over-65) ci sono ogni 100 giovani (under-15). Sopra 100 significa più anziani che giovani; 157,1 vuol dire circa 157 over-65 ogni 100 under-15." },
+      info: "Misura quanto è 'anziana' la popolazione. A Gioia del Colle vale **157,1**, sopra la media nazionale del 2011 (~148): un territorio che invecchia, con più pressione su servizi socio-assistenziali e sanità.\n\nÈ una caratteristica del territorio, non un dato di performance. Dato strutturale ISTAT, Censimento 2011." },
+    { value: "852 m", label: "Stazione dal centro", sub: "linea Bari–Taranto",
+      info: "Distanza della stazione ferroviaria (linea Bari–Taranto) dal centro abitato. Una dotazione di mobilità su ferro rara per un comune dell'entroterra murgiano, e una leva per l'intermodalità ferro-gomma. Fonte: OpenStreetMap." },
   ],
   swot: [
     {

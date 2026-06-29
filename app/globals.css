@@ -26,6 +26,16 @@ a { color: inherit; }
   .swot-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Griglia generica a 2 colonne: 1 su mobile, 2 da tablet in su */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 760px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
 /* Griglia card generica: responsive senza overflow su schermi stretti.
    minmax(min(<w>,100%),1fr) evita che la colonna minima sfori il viewport. */
 .card-grid {

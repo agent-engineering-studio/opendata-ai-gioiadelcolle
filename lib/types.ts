@@ -59,8 +59,22 @@ export interface CityAnalysis {
   generatedAt: string; // ISO
   disclaimer: string;
   intro: { eyebrow: string; title: string; text: string };
-  kpis: Kpi[];
+  /** Indice 0–100 sull'uso dei fondi pubblici (solo dati coesione). */
+  fundsScore: {
+    value: number;
+    spendRatioPct: number;
+    completionPct: number;
+    info: string;
+    glossary?: Glossary;
+  };
+  /** Capacità di spesa per tema (per il grafico a barre). */
+  spendByTheme: { label: string; pct: number }[];
+  avgSpendPct: number;
+  /** Numeri grandi resi "parlanti". */
+  fundsSummary: { projects: number; concluded: number; totalCost: string; perCapita: string };
   highlights: { value: string; label: string; text: string; color: string; info?: string; glossary?: Glossary }[];
+  /** "Carta d'identità" del comune: dati strutturali ISTAT (contesto, non performance). */
+  identity: Kpi[];
   swot: SwotQuadrant[];
   proposte: AnalysisItem[];
   idee: AnalysisItem[];
