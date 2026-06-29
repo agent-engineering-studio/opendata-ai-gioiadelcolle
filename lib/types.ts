@@ -17,6 +17,7 @@ export interface Kpi {
   value: string;
   label: string;
   sub: string;
+  info?: string; // spiegazione estesa mostrata nella modale "i"
 }
 
 export interface SwotItem {
@@ -52,7 +53,7 @@ export interface CityAnalysis {
   disclaimer: string;
   intro: { eyebrow: string; title: string; text: string };
   kpis: Kpi[];
-  highlights: { value: string; label: string; text: string; color: string }[];
+  highlights: { value: string; label: string; text: string; color: string; info?: string }[];
   swot: SwotQuadrant[];
   proposte: AnalysisItem[];
   idee: AnalysisItem[];
