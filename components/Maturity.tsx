@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import type { MaturityReport, MaturityScored, MaturityInsufficient } from "@/lib/types";
+import type { MaturityReport, MaturityScored, MaturityInsufficient, MaturityLink } from "@/lib/types";
 import { Section, SectionHead } from "./Section";
 import InfoDot from "./InfoDot";
 
@@ -47,6 +47,44 @@ function Bars({ dims }: { dims: { name: string; score: number }[] }) {
         );
       })}
     </div>
+  );
+}
+
+function DocsAndRefs({ docs, references }: { docs?: MaturityLink[]; references?: MaturityLink[] }) {
+  const hasDocs = docs && docs.length > 0;
+  const hasRefs = references && references.length > 0;
+  if (!hasDocs && !hasRefs) return null;
+  return (
+    <>
+      {hasDocs && (
+        <div style={{ marginTop: 30 }}>
+          <h3 style={{ margin: "0 0 14px", font: "600 18px 'Spectral'", color: "#211E1A" }}>Documentazione e strumenti</h3>
+          <div className="card-grid" style={{ "--col": "300px" } as React.CSSProperties}>
+            {docs!.map((l) => (
+              <a key={l.url} href={l.url} target="_blank" rel="noopener" className="card" style={{ display: "block", textDecoration: "none", background: "#fff", border: "1px solid #E6DECF", borderLeft: "4px solid #A8432A", borderRadius: 8, padding: "16px 18px" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 14px 'Archivo'", color: "#A8432A" }}>
+                  {l.label}
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+                </span>
+                {l.note && <p style={{ margin: "6px 0 0", font: "400 12.5px/1.5 'Archivo'", color: "#5A5346" }}>{l.note}</p>}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+      {hasRefs && (
+        <div style={{ marginTop: 24 }}>
+          <h4 style={{ margin: "0 0 10px", font: "600 12px 'Archivo'", letterSpacing: ".06em", textTransform: "uppercase", color: "#6B6356" }}>Riferimenti istituzionali</h4>
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
+            {references!.map((l) => (
+              <li key={l.url}>
+                <a href={l.url} target="_blank" rel="noopener" style={{ font: "500 13px 'Archivo'", color: "#3A5A8C", textDecoration: "none", borderBottom: "1px solid #C9D3E5", paddingBottom: 1 }}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -106,6 +144,8 @@ function Scorecard({ r }: { r: MaturityReport & { data: MaturityScored } }) {
           </div>
         </div>
       )}
+
+      <DocsAndRefs docs={d.docs} references={d.references} />
     </div>
   );
 }
@@ -131,6 +171,12 @@ function RegionContext({ r }: { r: MaturityReport & { data: MaturityScored } }) 
           <div style={{ font: "400 12.5px/1.5 'Archivo'", color: "#5A5346" }}>
             Livello <strong>{d.odmLevel}</strong> · {d.datasetCount} dataset valutati. La Regione fa da riferimento: anche senza dati propri, il Comune può agganciarsi al portale regionale.
           </div>
+          {d.docs && d.docs[0] && (
+            <a href={d.docs[0].url} target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 8, font: "600 12.5px 'Archivo'", color: "#A8432A", textDecoration: "none" }}>
+              {d.docs[0].label}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -191,35 +237,7 @@ function Insufficient({ r, region }: { r: MaturityReport & { data: MaturityInsuf
         ))}
       </ol>
 
-      {d.docs && d.docs.length > 0 && (
-        <div style={{ marginTop: 30 }}>
-          <h3 style={{ margin: "0 0 14px", font: "600 18px 'Spectral'", color: "#211E1A" }}>Documentazione e strumenti</h3>
-          <div className="card-grid" style={{ "--col": "300px" } as React.CSSProperties}>
-            {d.docs.map((l) => (
-              <a key={l.url} href={l.url} target="_blank" rel="noopener" className="card" style={{ display: "block", textDecoration: "none", background: "#fff", border: "1px solid #E6DECF", borderLeft: "4px solid #A8432A", borderRadius: 8, padding: "16px 18px" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 14px 'Archivo'", color: "#A8432A" }}>
-                  {l.label}
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-                </span>
-                {l.note && <p style={{ margin: "6px 0 0", font: "400 12.5px/1.5 'Archivo'", color: "#5A5346" }}>{l.note}</p>}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {d.references && d.references.length > 0 && (
-        <div style={{ marginTop: 24 }}>
-          <h4 style={{ margin: "0 0 10px", font: "600 12px 'Archivo'", letterSpacing: ".06em", textTransform: "uppercase", color: "#6B6356" }}>Riferimenti istituzionali</h4>
-          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
-            {d.references.map((l) => (
-              <li key={l.url}>
-                <a href={l.url} target="_blank" rel="noopener" style={{ font: "500 13px 'Archivo'", color: "#3A5A8C", textDecoration: "none", borderBottom: "1px solid #C9D3E5", paddingBottom: 1 }}>{l.label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <DocsAndRefs docs={d.docs} references={d.references} />
 
       {d.note && <p style={{ margin: "22px 0 0", font: "italic 400 12.5px/1.55 'Archivo'", color: "#9A8E78" }}>{d.note}</p>}
 

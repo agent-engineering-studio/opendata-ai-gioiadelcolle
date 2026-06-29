@@ -115,6 +115,13 @@ if (/dato insufficiente/i.test(md)) {
     .filter(Boolean)
     .map((m) => ({ priority: m[1].trim(), text: m[2].trim() }));
 
+  // CTA "Apri la scheda di maturità completa …" (fuori dalle sezioni standard)
+  if (docs.length === 0) {
+    const ctaLine = lines.find((l) => /scheda di maturità|scheda.*completa/i.test(l));
+    const m = ctaLine && ctaLine.match(/\[([^\]]+)\]\(([^)]+)\)\s*(.*)$/);
+    if (m) docs.push({ label: m[1].trim(), url: mapHost(m[2].trim()), note: m[3] ? m[3].trim() : null });
+  }
+
   data = { status, odmLevel, score, datasetCount, dimensions, sectorsMissing, recommendations, docs, references };
 }
 
