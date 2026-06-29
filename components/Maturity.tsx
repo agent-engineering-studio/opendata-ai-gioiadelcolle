@@ -141,14 +141,31 @@ function Insufficient({ r, region }: { r: MaturityReport & { data: MaturityInsuf
   const d = r.data;
   return (
     <div>
-      <div style={{ display: "flex", gap: 11, alignItems: "flex-start", background: "#FBF3E6", border: "1px solid #E7D3B0", borderRadius: 8, padding: "16px 18px", marginBottom: 22 }}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B5752B" strokeWidth="1.8" style={{ flex: "none", marginTop: 1 }}>
-          <path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
-        </svg>
-        <div>
-          <div style={{ font: "600 14px 'Archivo'", color: "#8A5A1F", marginBottom: 4 }}>Dato insufficiente</div>
-          <p style={{ margin: 0, font: "400 13.5px/1.6 'Archivo'", color: "#5A5346" }}>{renderInline(d.intro)}</p>
+      <div
+        role="alert"
+        style={{
+          position: "relative", overflow: "hidden", background: "#A8432A", color: "#fff",
+          border: "1px solid #8E3522", borderRadius: 12, padding: "clamp(22px,4vw,32px)",
+          marginBottom: 26, boxShadow: "0 14px 38px rgba(168,67,42,.28)",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
+          <span style={{ flex: "none", width: 46, height: 46, borderRadius: 12, background: "rgba(255,255,255,.14)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+            </svg>
+          </span>
+          <span style={{ font: "700 12px 'Archivo'", letterSpacing: ".16em", textTransform: "uppercase", color: "#F3D9CF" }}>
+            Attenzione · Trasparenza amministrativa
+          </span>
         </div>
+        <h3 style={{ margin: "0 0 12px", font: "600 clamp(22px,3.2vw,30px)/1.2 'Spectral'", color: "#FFF8F2" }}>
+          Su questo comune non risultano dati aperti pubblicati
+        </h3>
+        <p style={{ margin: "0 0 12px", font: "500 15px/1.6 'Archivo'", color: "#FBEFE9" }}>
+          I <strong>dati aperti</strong> sono la base della <strong>trasparenza amministrativa</strong>: senza, cittadini, imprese e ricercatori non possono verificare come vengono usate le risorse pubbliche, e un&apos;analisi come questa resta inevitabilmente <strong>incompleta e meno affidabile</strong>. Pubblicarli è un atto concreto di trasparenza, fiducia e partecipazione democratica.
+        </p>
+        <p style={{ margin: 0, font: "400 13.5px/1.6 'Archivo'", color: "#EAD3CB" }}>{renderInline(d.intro)}</p>
       </div>
 
       <h3 style={{ margin: "0 0 14px", font: "600 18px 'Spectral'", color: "#211E1A" }}>Perché pubblicare open data</h3>
